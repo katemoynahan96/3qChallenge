@@ -1,0 +1,38 @@
+//Challenge 1
+function myFunction() {
+    var price = document.querySelector("div[data-test='product-price']").innerText.replace(/\$/g, '');
+    var test = JSON.parse(document.querySelector('script[type="application/ld+json"]').innerText);
+    var curr = test["@graph"][0].offers.priceCurrency;
+}
+var myObject = {'price': price, 'currency': curr};
+console.log(myObject); 
+
+//Challenge 2
+var signUp = document.querySelectorAll("a[href*='signup']");
+for (var i = 0, len = signUp.length; i < len; i++)
+{
+
+    (function(index){
+       signUp[i].onclick = function(){
+              alert("Clicked button " + index)  ;
+              //returns index 0, 1, or 2
+        }    
+    })(i);
+}
+
+//Challenge 3 
+var checkCookie = document.cookie.split(';').some((item) => item.trim().startsWith('browserClick='));
+if (checkCookie == true) { //cookie set
+    console.log(event.target.innerText);
+    console.log('cookie has not been set')
+}
+if (checkCookie == false) { //cookie not set
+    var name = document.querySelectorAll("li[class*='level0 nav']").forEach(item => {
+    	item.addEventListener('click', event => {
+        	var newCookie = event.target.innerText;
+                document.cookie = newCookie;
+                console.log(newCookie); 
+        	console.log('cookie has not been set')
+    	})    
+	});
+}
